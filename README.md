@@ -1,8 +1,8 @@
 # Talona TypeScript SDK
 
-The official TypeScript SDK for [Talona](https://talona.ai). Create managed cloud browsers, connect your automation over CDP, and stop them when your work is done.
+The official TypeScript SDK for [Talona](https://talona.ai). Run Talona's hosted browser agent or connect your own agent to a managed browser over CDP.
 
-> **Early access:** The Browser API and this SDK are under active development. Pin an exact SDK version before deploying to production.
+> **Early access:** The Agent API, Browser API, and this SDK are under active development. Pin an exact SDK version before deploying to production.
 
 ## Install
 
@@ -19,6 +19,21 @@ Create an API key in the Talona developer dashboard and store it on your server:
 ```sh
 TALONA_API_KEY=talona_your_api_key
 ```
+
+```ts
+import { Talona } from "@talona/sdk";
+
+const talona = new Talona();
+const run = await talona.agents.run({
+  task: "Open example.com and report the page title",
+});
+
+console.log(run.output);
+```
+
+`agents.run()` starts the task and polls until it finishes. For queues or your own polling loop, use `agents.create()`, `agents.get()`, and `agents.cancel()`. See the [Agent API guide](./docs/agent-api.md).
+
+## Bring your own agent
 
 ```ts
 import { Talona } from "@talona/sdk";

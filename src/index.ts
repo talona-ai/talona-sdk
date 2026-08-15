@@ -14,15 +14,21 @@ export {
   TalonaTimeoutError,
 } from "./errors.js";
 export type {
+  AgentRun,
+  AgentRunList,
+  AgentRunStatus,
   Browser,
   BrowserList,
   BrowserMetadata,
   BrowserStatus,
   CreateBrowserOptions,
+  CreateAgentRunParams,
   CreateBrowserParams,
   CreatedBrowser,
   Fetch,
   ListBrowsersParams,
+  ListAgentRunsParams,
   RequestOptions,
+  RunAgentOptions,
   TalonaOptions,
 } from "./types.js";

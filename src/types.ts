@@ -44,6 +44,51 @@ export interface BrowserList {
   items: Browser[];
 }
 
+export type AgentRunStatus =
+  | "queued"
+  | "running"
+  | "waiting"
+  | "succeeded"
+  | "failed"
+  | "cancelling"
+  | "cancelled"
+  | "timed_out";
+
+export interface AgentRun {
+  id: string;
+  status: AgentRunStatus;
+  task: string;
+  output?: string;
+  error?: string;
+  /** Browser session used by the run, once one has been created. */
+  sessionId?: string;
+  createdAt: string;
+  startedAt?: string;
+  finishedAt?: string;
+  expiresAt: string;
+  metadata: Record<string, string>;
+}
+
+export interface CreateAgentRunParams {
+  task: string;
+  /** Maximum execution time in seconds (30–900). */
+  timeoutSeconds?: number;
+  metadata?: Record<string, string>;
+}
+
+export interface ListAgentRunsParams {
+  limit?: number;
+}
+
+export interface AgentRunList {
+  items: AgentRun[];
+}
+
+export interface RunAgentOptions extends RequestOptions {
+  /** Delay between status checks. Defaults to one second. */
+  pollIntervalMs?: number;
+}
+
 /** Options accepted by every API request. */
 export interface RequestOptions {
   /** Abort the request and any pending retry. */
