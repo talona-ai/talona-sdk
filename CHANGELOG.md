@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Add hosted Agent Runs through `talona.agents`, including create, get, list, cancel, and the create-and-poll `run` helper.
+
 All notable changes to this project will be documented in this file.
 
 This project follows [Semantic Versioning](https://semver.org/).

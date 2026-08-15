@@ -1,12 +1,14 @@
 import { HTTPClient } from "./core/http.js";
 import { TalonaError } from "./errors.js";
 import { Browsers } from "./resources/browsers.js";
+import { Agents } from "./resources/agents.js";
 import type { TalonaOptions } from "./types.js";
 
 const DEFAULT_BASE_URL = "https://api.talona.ai";
 
 /** The official TypeScript client for Talona. */
 export class Talona {
+  readonly agents: Agents;
   readonly browsers: Browsers;
 
   constructor(options: TalonaOptions = {}) {
@@ -31,15 +33,15 @@ export class Talona {
       );
     }
 
-    this.browsers = new Browsers(
-      new HTTPClient({
-        apiKey: apiKey.trim(),
-        baseUrl: normalizeBaseUrl(options.baseUrl ?? DEFAULT_BASE_URL),
-        fetch: customFetch,
-        maxRetries,
-        timeoutMs,
-      }),
-    );
+    const http = new HTTPClient({
+      apiKey: apiKey.trim(),
+      baseUrl: normalizeBaseUrl(options.baseUrl ?? DEFAULT_BASE_URL),
+      fetch: customFetch,
+      maxRetries,
+      timeoutMs,
+    });
+    this.agents = new Agents(http);
+    this.browsers = new Browsers(http);
   }
 }
 
