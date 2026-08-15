@@ -1,0 +1,69 @@
+{
+  "name": "@talona/sdk",
+  "version": "0.1.0",
+  "description": "The official TypeScript SDK for Talona's Browser API.",
+  "keywords": [
+    "talona",
+    "browser",
+    "browser-api",
+    "cdp",
+    "automation",
+    "typescript"
+  ],
+  "homepage": "https://github.com/talona-ai/talona-sdk#readme",
+  "bugs": {
+    "url": "https://github.com/talona-ai/talona-sdk/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/talona-ai/talona-sdk.git"
+  },
+  "license": "MIT",
+  "author": "Talona",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "overrides": {
+    "esbuild": "0.28.2"
+  },
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "build": "tsup",
+    "check": "npm run format:check && npm run typecheck && npm test && npm run build && npm run pack:check",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "pack:check": "npm pack --dry-run",
+    "prepublishOnly": "npm run check",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "24.13.3",
+    "prettier": "3.9.6",
+    "tsup": "8.5.1",
+    "typescript": "5.9.3",
+    "vitest": "4.1.10"
+  }
+}
